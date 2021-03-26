@@ -19,6 +19,7 @@ class_8 = []
 class_9 = []
 
 
+#split into the 10 different classes (image and label combined)
 for i in range(len(images)):
     if (labels[i] == 0):
         class_0.append([images[i],labels[i]])
@@ -51,34 +52,39 @@ for i in range(len(images)):
         class_9.append([images[i],labels[i]])
         
  
+#combines all classes into one for sake of looping
 class_Ult = [class_0, class_1, class_2, class_3, class_4, class_5, class_6, class_7, class_8, class_9]
 
 trainList = []
 valList = []
 testList = []
 
+#looping through each class
 for i in class_Ult:
+    #shuffling the items in each class
     rd.shuffle(i)
 
     iLen = len(i)
     trainSplice = int(0.6*iLen)
     valSplice = int(0.8*iLen)
 
+    #from each class, 60% to training, 20% to validation, and 20% to testing
     trainList.append(i[0:trainSplice])
     valList.append(i[trainSplice:valSplice])
     testList.append(i[valSplice:])
     
-
+#flattening out the lists
 trainList = [val for sublist in trainList for val in sublist]
 valList = [val for sublist in valList for val in sublist]
 testList = [val for sublist in testList for val in sublist]
 
+#correcting the format so that the list is as follows -> [[images], [corresponding tags]]
 trainList = [[i[0] for i in trainList],[i[1] for i in trainList]]
 valList = [[i[0] for i in valList],[i[1] for i in valList]]
 testList = [[i[0] for i in testList],[i[1] for i in testList]]
 
 
-
+#creating the h5 file
 hf = h5py.File('galaxy_split_augmented.h5', 'w')    
 
 g1 = hf.create_group('train')
