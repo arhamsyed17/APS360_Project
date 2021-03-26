@@ -41,42 +41,32 @@ class galaxy_model(nn.Module):
     
     self.pool2 = nn.MaxPool2d(2, 2)
     n = self._n_calc(n, 2, stride=2) # calculate intermediate output dimensions
+    n = int(n)
     print('\nPool2 Output Size:', np.floor(n))
     
-    self.conv3= nn.Conv2d(out2_channels, out3_channels, kernal_size)
-    n = self._n_calc(n, kernal_size) # calculate intermediate output dimensions
-    print('\nConv3 Output Size:', np.floor(n))
-    print('Number of Parameters from Conv3:', self.numParamCNN(out2_channels,out3_channels,kernal_size))
-    suM +=  self.numParamCNN(out2_channels,out3_channels,kernal_size)
-    
-    self.pool3 = nn.MaxPool2d(2, 2)
-    n = self._n_calc(n, 2, stride=2) # calculate intermediate output dimensions
-    n = int(n)
-    print('\nPool3 Output Size:', n)
     # Fully connected layers
     
-    self.fc1 = nn.Linear(out3_channels * n * n, 2000)
-    print('\nFc1 Output Size:', 2000)
-    print('Number of Parameters from Fc1:', self.numParamANN(out3_channels*n*n,2000))
-    suM +=  self.numParamANN(out3_channels*n*n,2000)
-    
-    self.fc2 = nn.Linear(2000, 1000)
-    print('\nFc2 Output Size:', 1000)
-    print('Number of Parameters from Fc2:', self.numParamANN(2000,1000))
-    suM +=  self.numParamANN(2000,1000)
-    
-    self.fc3 = nn.Linear(1000, 10)
-    print('\nFc3 Output Size:', 10)
-    print('Number of Parameters from Fc3:', self.numParamANN(1000,10))
+    self.fc1 = nn.Linear(out2_channels * n * n, 1000)
+    print('\nFc1 Output Size:', 1000)
+    print('Number of Parameters from Fc1:', self.numParamANN(out2_channels*n*n,1000))
+    suM +=  self.numParamANN(out2_channels*n*n,1000)
+
+    self.fc2 = nn.Linear(1000, 10)
+    print('\nFc1 Output Size:', 10)
+    print('Number of Parameters from Fc1:', self.numParamANN(1000,10))
     suM +=  self.numParamANN(1000,10)
+    
     print('\nTotal Number of Parameters:', suM)
+    
+    self.droput = nn.Dropout(0.25)
 
   def forward(self, x):
     out = self.pool1(F.relu(self.conv1(x)))
     out = self.pool2(F.relu(self.conv2(out)))
-    out = self.pool3(F.relu(self.conv3(out)))
     out = out.view(out.size(0), -1) # flatten
+    out = self.droput(out)
     out = F.relu(self.fc1(out))
+    out = self.droput(out)
     out = self.fc2(out)
     out = out.squeeze(1)
     return out
