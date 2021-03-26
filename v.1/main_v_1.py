@@ -47,11 +47,17 @@ with h5py.File('../galaxy_split_augmented.h5', 'r') as gData:
         test_data.append(tuple([transform(images[i]),labels[i]]))
 
 
+print(len(train_data))
+print(len(val_data))
+print(len(test_data))
+random.shuffle(train_data)
+random.shuffle(val_data)
+random.shuffle(test_data)
 
 model = galaxy_model()
 model.cuda()
 
 train(model, train_data, batch_size=10, num_epochs=30, val_True = True, val_data = val_data)
 
-test_loader = torch.utils.data.DataLoader(test_data, batch_size=15, shuffle=True)
+test_loader = torch.utils.data.DataLoader(test_data, batch_size=10, shuffle=True)
 print("Test Accuracy:", get_accuracy(model,test_loader)*100)

@@ -65,10 +65,10 @@ for i in class_Ult:
     rd.shuffle(i)
 
     iLen = len(i)
-    trainSplice = int(0.6*iLen)
-    valSplice = int(0.8*iLen)
+    trainSplice = int(0.8*iLen)
+    valSplice = int(0.9*iLen)
 
-    #from each class, 60% to training, 20% to validation, and 20% to testing
+    #from each class, 80% to training, 10% to validation, and 10% to testing
     trainList.append(i[0:trainSplice])
     valList.append(i[trainSplice:valSplice])
     testList.append(i[valSplice:])
