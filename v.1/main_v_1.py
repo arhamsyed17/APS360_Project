@@ -47,9 +47,6 @@ with h5py.File('../galaxy_split_augmented.h5', 'r') as gData:
         test_data.append(tuple([transform(images[i]),labels[i]]))
 
 
-print(len(train_data))
-print(len(val_data))
-print(len(test_data))
 random.shuffle(train_data)
 random.shuffle(val_data)
 random.shuffle(test_data)

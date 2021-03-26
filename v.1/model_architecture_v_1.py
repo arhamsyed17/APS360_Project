@@ -58,7 +58,7 @@ class galaxy_model(nn.Module):
     
     print('\nTotal Number of Parameters:', suM)
     
-    self.droput = nn.Dropout(0.5)
+    self.droput = nn.Dropout(0.35)
 
   def forward(self, x):
     out = self.pool1(F.relu(self.conv1(x)))
@@ -114,7 +114,7 @@ def train(model, train_data, val_data, val_True=False,batch_size=20, lr=0.001, n
       val_loader = torch.utils.data.DataLoader(val_data, batch_size=batch_size, shuffle=True)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=lr, weight_decay = 1e-5)
+    optimizer = optim.Adam(model.parameters(), lr=lr)
 
     iters, losses, train_acc, val_acc, epochs = [], [], [], [], []
 
