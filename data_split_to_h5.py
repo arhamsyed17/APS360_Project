@@ -3,7 +3,7 @@ import numpy as np
 import random as rd
 import matplotlib.pyplot as plt
 
-with h5py.File('images_augmented.h5', 'r') as F:
+with h5py.File('images_augmented_v2.h5', 'r') as F:
     images = np.array(F['images'])
     labels = np.array(F['labels'])
 
@@ -53,7 +53,7 @@ for i in range(len(images)):
         
  
 #combines all classes into one for sake of looping
-class_Ult = [class_0, class_1, class_2, class_3, class_4, class_5, class_6, class_7, class_8, class_9]
+class_Ult = [class_0, class_1, class_2, class_3, class_4,class_5, class_6, class_7, class_8, class_9]
 
 trainList = []
 valList = []

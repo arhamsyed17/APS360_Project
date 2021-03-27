@@ -17,11 +17,8 @@ import torchvision.transforms as transforms
 import matplotlib.pyplot as plt # for plotting
 import torch.optim as optim #for gradient descent
 
-import astroNN
-from astroNN.datasets import galaxy10
-from astroNN.datasets.galaxy10 import galaxy10cls_lookup
 
-from model_architecture_v_1 import *
+from model_architecture_v_3 import *
 
 transform = transforms.Compose([transforms.ToTensor(),transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
@@ -54,7 +51,7 @@ random.shuffle(test_data)
 model = galaxy_model()
 model.cuda()
 
-train(model, train_data, batch_size=100, num_epochs=30, val_True = True, val_data = val_data, lr = 0.01)
+train(model, train_data, batch_size=100, num_epochs=30, val_True = True, val_data = val_data, lr = 0.001)
 
 test_loader = torch.utils.data.DataLoader(test_data, batch_size=10, shuffle=True)
 print("Test Accuracy:", get_accuracy(model,test_loader)*100)

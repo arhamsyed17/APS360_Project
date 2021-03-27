@@ -1,0 +1,9 @@
+1) V.1: MARCH-26 @ 11:51 PM
+	- Training Accuracy: 	98%  	
+	- Validation Accuracy:	78%	
+	- Test Accuracy:	78%   		
+	- bs = 100, epochs = 30, lr = 0.01 (SGD Optimizer)
+
+2)
+
+3)

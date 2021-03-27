@@ -115,7 +115,7 @@ def train(model, train_data, val_data, val_True=False,batch_size=20, lr=0.001, n
       val_loader = torch.utils.data.DataLoader(val_data, batch_size=batch_size, shuffle=True)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=lr, momentum=0.8)
+    optimizer = optim.Adam(model.parameters(), lr=lr)
 
     iters, losses, train_acc, val_acc, epochs = [], [], [], [], []
 
