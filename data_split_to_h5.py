@@ -1,9 +1,11 @@
 import h5py
 import numpy as np
 import random as rd
+import random
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
-with h5py.File('images_augmented_v2.h5', 'r') as F:
+with h5py.File('./augmented_data/new/new_aug_v5.h5', 'r') as F:
     images = np.array(F['images'])
     labels = np.array(F['labels'])
 
@@ -18,9 +20,9 @@ class_7 = []
 class_8 = []
 class_9 = []
 
-
+print(len(labels))
 #split into the 10 different classes (image and label combined)
-for i in range(len(images)):
+for i in tqdm(range(len(images))):
     if (labels[i] == 0):
         class_0.append([images[i],labels[i]])
         
@@ -51,7 +53,17 @@ for i in range(len(images)):
     if (labels[i] == 9):
         class_9.append([images[i],labels[i]])
         
- 
+
+random.shuffle(class_0)
+random.shuffle(class_1)
+random.shuffle(class_2)
+random.shuffle(class_3)
+random.shuffle(class_4)
+random.shuffle(class_5)
+random.shuffle(class_6)
+random.shuffle(class_7)
+random.shuffle(class_8)
+random.shuffle(class_9)
 #combines all classes into one for sake of looping
 class_Ult = [class_0, class_1, class_2, class_3, class_4,class_5, class_6, class_7, class_8, class_9]
 
@@ -85,7 +97,7 @@ testList = [[i[0] for i in testList],[i[1] for i in testList]]
 
 
 #creating the h5 file
-hf = h5py.File('galaxy_split_augmented.h5', 'w')    
+hf = h5py.File('split_aug_v6.h5', 'w')    
 
 g1 = hf.create_group('train')
 g2 = hf.create_group('val')
@@ -102,6 +114,5 @@ g3.create_dataset('labels',data = testList[1])
 
 hf.close()
 
-# with h5py.File('galaxy_split_augmented.h5', 'r') as P:
-#     train = np.array(P['train'])
+
 
