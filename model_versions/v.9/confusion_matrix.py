@@ -57,8 +57,29 @@ def confusion_matrix(test_loader_data, model, num_classes = 10):
         # False negatives
         dict_false_negatives["Class " + str(label)] = sum(C_matrix[label]) - C_matrix[label, label]
     
+    # intialize F1 Score Matrix
+    dict_F1_scores = {}
+    dict_Precision = {}
+    dict_Recall = {}
+
+    for label in range(num_classes):
+        dict_F1_scores["Class " + str(label)] = 0
+        dict_Precision["Class " + str(label)] = 0
+        dict_Recall["Class " + str(label)] = 0
+
+    for label in range(num_classes):
+        tp = dict_true_positives["Class " + str(label)] 
+        fp = dict_false_positives["Class " + str(label)]
+        fn = dict_false_negatives["Class " + str(label)]
+
+        precision = tp / (tp + fp)
+        recall = tp / (tp + fn) 
+
+        dict_Precision["Class " + str(label)] = round(precision, 4)
+        dict_Recall["Class " + str(label)] = round(recall, 4)
+        dict_F1_scores["Class " + str(label)] = round(2* precision*recall / (precision + recall), 4)
     
-    return dict_true_positives, dict_false_positives, dict_false_negatives, C_matrix 
+    return dict_true_positives, dict_false_positives, dict_false_negatives, C_matrix, dict_Precision, dict_Recall, dict_F1_scores
     
             
             
