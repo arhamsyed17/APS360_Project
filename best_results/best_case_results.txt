@@ -1,4 +1,5 @@
 1) V.1: MARCH-26 @ 11:51 PM
+	- split_aug_v1- OLD DATA- ZINAN AUGMENTED
 	- Training Accuracy: 	98%  	
 	- Validation Accuracy:	78%	
 	- Test Accuracy:	78%   		
@@ -27,14 +28,8 @@
 	- Test Accuracy:	82%   		
 	- bs = 10, epochs = 100, lr = 0.01 (SGD Optimizer)
 
-5) V.6: MARCH-29 @ 11:53 PM
-	- USING NEW DATA: split_aug_v4
-	- Training Accuracy: 	99%  	
-	- Validation Accuracy:	81%	
-	- Test Accuracy:	81%   		
-	- bs = 10, epochs = 100, lr = 0.0101 (SGD Optimizer)
 
-6) V.8: MARCH-30 @ 2:52 AM
+5) V.8: MARCH-30 @ 2:52 AM
 	- USING NEW DATA: split_aug_v6
 	- Training Accuracy: 	99%  	
 	- Validation Accuracy:	81%	

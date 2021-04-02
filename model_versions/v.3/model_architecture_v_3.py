@@ -18,7 +18,7 @@ import torch.optim as optim #for gradient descent
 
 
 class galaxy_model(nn.Module):
-  def __init__(self, img_size=69, out1_channels=5, out2_channels=15, out3_channels=30, kernal_size=5, lastOutput = 10):
+  def __init__(self, img_size=69, out1_channels=5, out2_channels=15, kernal_size=5, lastOutput = 10):
     super(galaxy_model, self).__init__()
     self.name = "gesture_model"
 
@@ -64,9 +64,7 @@ class galaxy_model(nn.Module):
     out = self.pool1(F.relu(self.conv1(x)))
     out = self.pool2(F.relu(self.conv2(out)))
     out = out.view(out.size(0), -1) # flatten
-    #out = self.droput(out)
     out = F.relu(self.fc1(out))
-    #out = self.droput(out)
     out = self.fc2(out)
     out = out.squeeze(1)
     return out
@@ -115,7 +113,7 @@ def train(model, train_data, val_data, val_True=False,batch_size=20, lr=0.001, n
       val_loader = torch.utils.data.DataLoader(val_data, batch_size=batch_size, shuffle=True)
 
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.SGD(model.parameters(), lr=lr, momentum=0.8)
+    optimizer = optim.Adam(model.parameters(), lr=lr)
 
     iters, losses, train_acc, val_acc, epochs = [], [], [], [], []
 

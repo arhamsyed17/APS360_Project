@@ -64,9 +64,7 @@ class galaxy_model(nn.Module):
     out = self.pool1(F.relu(self.conv1(x)))
     out = self.pool2(F.relu(self.conv2(out)))
     out = out.view(out.size(0), -1) # flatten
-    #out = self.droput(out)
     out = F.relu(self.fc1(out))
-    #out = self.droput(out)
     out = self.fc2(out)
     out = out.squeeze(1)
     return out

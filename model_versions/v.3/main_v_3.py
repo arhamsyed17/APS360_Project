@@ -26,7 +26,7 @@ train_data = []
 val_data = []
 test_data = []
 
-with h5py.File('../galaxy_split_augmented.h5', 'r') as gData:
+with h5py.File('../split_aug_v1.h5', 'r') as gData:
     
     images = np.array(gData['train']['images'])
     labels = np.array(gData['train']['labels'])

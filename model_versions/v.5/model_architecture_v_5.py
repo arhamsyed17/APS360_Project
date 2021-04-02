@@ -18,7 +18,7 @@ import torch.optim as optim #for gradient descent
 
 
 class galaxy_model(nn.Module):
-  def __init__(self, img_size=125, out1_channels=20, out2_channels=30, out3_channels=60, out4_channels = 100, out5_channels = 120,kernal_size=5, lastOutput = 10):
+  def __init__(self, img_size=125, out1_channels=20, out2_channels=30, out3_channels=60, out4_channels = 100,kernal_size=5, lastOutput = 10):
     super(galaxy_model, self).__init__()
     self.name = "gesture_model"
     self.out3_channels = out3_channels
@@ -85,7 +85,6 @@ class galaxy_model(nn.Module):
     out = out.view(out.size(0), -1) # flatten
     out = self.droput(out)
     out = self.fc1(out)
-    #out = self.droput(out)
     out = out.squeeze(1)
     return out
 
