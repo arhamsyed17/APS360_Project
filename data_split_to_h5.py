@@ -5,7 +5,7 @@ import random
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-with h5py.File('./augmented_data/new/new_aug_v5.h5', 'r') as F:
+with h5py.File('./augmented_data/new/new_aug_v6.h5', 'r') as F:
     images = np.array(F['images'])
     labels = np.array(F['labels'])
 
@@ -97,7 +97,7 @@ testList = [[i[0] for i in testList],[i[1] for i in testList]]
 
 
 #creating the h5 file
-hf = h5py.File('split_aug_v6.h5', 'w')    
+hf = h5py.File('split_aug_v7.h5', 'w')    
 
 g1 = hf.create_group('train')
 g2 = hf.create_group('val')

@@ -116,7 +116,7 @@ class galaxy_model(nn.Module):
   def numParamANN(self,inSize,outSize):
     return (inSize+1)*outSize
 
-def get_accuracy(model, data_loader):
+def get_accuracy(model, data_loader, confusionMatrix = False):
 
     correct = 0
     total = 0
@@ -170,7 +170,7 @@ def train(model, train_data, val_data, val_True=False,batch_size=20, lr=0.001, n
             optimizer.step()              # make the updates for each parameter
             optimizer.zero_grad()         # a clean up step for PyTorch
 
-        if (epoch%3 == 0):
+        if (epoch%5 == 0):
             train_acc.append(get_accuracy(model, train_loader))   # compute training accuracy
     
             if val_True:
